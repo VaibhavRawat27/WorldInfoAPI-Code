@@ -135,5 +135,5 @@ If you like this project, **star ⭐ the repo**!
 
 ### 👨‍💻 Author
 
-Developed by **Your Name**  
-GitHub: [Your Profile](https://github.com/yourusername)
+Developed by **Vaibhav Rawat**  
+GitHub: [Your Profile](https://github.com/vaibhavrawat27)
