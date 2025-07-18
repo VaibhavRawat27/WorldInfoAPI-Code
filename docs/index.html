@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>World Time & Info API - Documentation</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f7fb;
+      color: #333;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #1e3c72;
+      background: linear-gradient(to right, #2a5298, #1e3c72);
+      color: #fff;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    header p {
+      margin-top: 8px;
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+    .container {
+      max-width: 950px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.05);
+    }
+    h2 {
+      color: #2a5298;
+      border-left: 4px solid #2a5298;
+      padding-left: 10px;
+      margin-top: 30px;
+    }
+    .endpoint {
+      background: #f0f3f9;
+      border-left: 5px solid #2a5298;
+      padding: 15px;
+      border-radius: 5px;
+      margin: 15px 0;
+    }
+    .url {
+      background: #eee;
+      padding: 8px 10px;
+      border-radius: 5px;
+      font-family: monospace;
+      font-size: 0.95rem;
+      color: #444;
+      display: inline-block;
+      margin-top: 5px;
+    }
+    .response-box {
+      background: #1e1e1e;
+      color: #00ff9d;
+      padding: 15px;
+      border-radius: 5px;
+      font-family: Consolas, monospace;
+      font-size: 0.9rem;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      margin-top: 10px;
+    }
+    footer {
+      text-align: center;
+      color: #555;
+      padding: 20px;
+      font-size: 0.9rem;
+      background: #f0f3f9;
+      margin-top: 40px;
+    }
+    .note {
+      background: #fff5e1;
+      border-left: 5px solid #ffb300;
+      padding: 10px 15px;
+      border-radius: 5px;
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+    code {
+      color: #e83e8c;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🌍 World Time & Info API</h1>
+  <p>Get real-time time, weather, cultural facts, holidays, and more for any country!</p>
+</header>
+
+<div class="container">
+
+  <h2>📌 Overview</h2>
+  <p>
+    This API lets you fetch **current time, date, weather, cultural notes, public holidays, NASA image, and much more** for any country in the world.
+  </p>
+
+  <div class="note">
+    Base URL: <code>http://127.0.0.1:5000</code> (Replace with your deployed URL)
+  </div>
+
+  <h2>✅ Endpoints</h2>
+
+  <div class="endpoint">
+    <h3>1) Get Time & Information</h3>
+    <p><b>Method:</b> <code>GET</code></p>
+    <p><b>URL:</b></p>
+    <div class="url">/time?country=&lt;Country Name&gt;</div><br>
+    <div class="url">/time?timezone=&lt;Timezone Name&gt;</div>
+
+    <h4>Example:</h4>
+    <div class="url">http://127.0.0.1:5000/time?country=Japan</div>
+
+    <h4>Sample Response:</h4>
+    <div class="response-box">
+{
+  "country": "Japan",
+  "flag_image": "https://flagcdn.com/w320/jp.png",
+  "country_image": "https://source.unsplash.com/600x400/?Japan",
+  "date": "2025-07-17",
+  "day": "Thursday",
+  "time": "14:32:11",
+  "utc_offset": "+0900",
+  "greeting": "Good Afternoon",
+  "weather": {
+    "temperature": "29.4°C",
+    "condition": "Clear Sky"
+  }
+}
+    </div>
+  </div>
+
+  <div class="endpoint">
+    <h3>2) Compare Two Timezones</h3>
+    <p><b>Method:</b> <code>GET</code></p>
+    <p><b>URL:</b></p>
+    <div class="url">/compare?from=&lt;Timezone1&gt;&to=&lt;Timezone2&gt;</div>
+
+    <h4>Example:</h4>
+    <div class="url">http://127.0.0.1:5000/compare?from=Asia/Kolkata&to=America/New_York</div>
+
+    <h4>Sample Response:</h4>
+    <div class="response-box">
+{
+  "from": "Asia/Kolkata",
+  "to": "America/New_York",
+  "time_now_from": "18:22:12",
+  "time_now_to": "08:52:12",
+  "difference_hours": 9.5
+}
+    </div>
+  </div>
+
+  <h2>🎯 Adding More Countries</h2>
+  <p>
+    Open <code>data_store.py</code> and add entries to <b>CULTURAL_NOTES</b>, <b>LANGUAGES</b>, <b>CURRENCIES</b>, etc.
+  </p>
+
+  <div class="response-box">
+CULTURAL_NOTES["Brazil"] = "Brazilians greet with a handshake or a kiss."
+LANGUAGES["Brazil"] = "Portuguese"
+CURRENCIES["Brazil"] = {"name": "Brazilian Real", "code": "BRL"}
+  </div>
+
+  <h2>🚀 Quick Start</h2>
+  <ol>
+    <li>Install dependencies: <code>pip install flask requests pytz pycountry</code></li>
+    <li>Run: <code>python world_time_api.py</code></li>
+    <li>Open in browser: <code>http://127.0.0.1:5000/time?country=India</code></li>
+  </ol>
+
+</div>
+
+<footer>
+  Built with ❤️ using Python Flask | World Time & Info API
+</footer>
+
+</body>
+</html>
